@@ -2,9 +2,11 @@
   "name": "snakedualplayer",
   "version": "1.0.0",
   "description": "This is a two player version of the original snake",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "author": "Jonathan Cruz & Sean Scott",
   "license": "ISC",
