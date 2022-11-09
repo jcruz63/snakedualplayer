@@ -1,6 +1,7 @@
 import GameView from "./GameView";
 import RenderEngine from "./RenderEngine";
 import Snake from "./Snake";
+import Apple from "./Apple";
 
 class Game {
     private _gameView: GameView;
@@ -28,7 +29,9 @@ class Game {
     gameLoop = () => {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
         let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 2, this._gameView.gridSquareSize * 2);
+        let apple = new Apple(this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000");
         this._renderEngine.addRenderable(snake);
+        this._renderEngine.addRenderable(apple);
         this._renderEngine.render();
         console.log("game loop");
     }
