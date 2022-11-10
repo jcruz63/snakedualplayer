@@ -1,3 +1,30 @@
+class segment {
+    private _x: number;
+    private _y: number;
+
+    constructor(x: number, y: number) {
+        this._x = x;
+        this._y = y;
+    }
+
+
+    get x(): number {
+        return this._x;
+    }
+
+    set x(value: number) {
+        this._x = value;
+    }
+
+    get y(): number {
+        return this._y;
+    }
+
+    set y(value: number) {
+        this._y = value;
+    }
+}
+
 class Snake implements Renderable{
     private _length: number = 3;
     private _headColor: string = '#FFA500';
@@ -6,6 +33,7 @@ class Snake implements Renderable{
     private _height: number;
     private _x: number = 0;
     private _y: number = 0;
+    private _segments: segment[] = [];
 
 
     constructor(length: number, headColor: string, bodyColor: string, width: number, height: number, x: number, y: number) {
@@ -16,6 +44,7 @@ class Snake implements Renderable{
         this._height = height;
         this._x = x;
         this._y = y;
+
     }
 
     get length(): number {
@@ -67,6 +96,7 @@ class Snake implements Renderable{
     }
 
     get y(): number {
+
         return this._y;
     }
 
@@ -80,9 +110,7 @@ class Snake implements Renderable{
         context.fillRect(this._x, this._y, this._width, this._height)
         // Setting body
         context.fillStyle = this.bodyColor;
-        for (let i = 1; i < this._length; i++) {
-            context.fillRect(this._x, this._y - i * this._height, this._width, this._height)
-        }
+
     }
 }
 
