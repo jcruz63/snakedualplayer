@@ -80,3 +80,5 @@ class Snake implements Renderable{
         context.fillRect(this._x, this._y, this._width, this._height)
     }
 }
+
+export default Snake;
