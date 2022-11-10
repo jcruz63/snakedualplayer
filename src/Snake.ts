@@ -78,6 +78,11 @@ class Snake implements Renderable{
         // Setting head color
         context.fillStyle = this.headColor;
         context.fillRect(this._x, this._y, this._width, this._height)
+        // Setting body
+        context.fillStyle = this.bodyColor;
+        for (let i = 1; i < this._length; i++) {
+            context.fillRect(this._x, this._y - i * this._height, this._width, this._height)
+        }
     }
 }
 
