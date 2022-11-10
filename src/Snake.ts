@@ -107,8 +107,6 @@ class Snake implements Renderable{
         this._height = value;
     }
 
-    //todo: get x and y should be the head Segment x and y
-    //todo: set x and y should be the head Segment x and y
     get x(): number {
         // @ts-ignore
         return this._headSegment.x;
