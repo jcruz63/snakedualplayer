@@ -151,6 +151,7 @@ class Snake implements Renderable{
         })
     }
 
+    //todo: test this method I think direction is needed
     addSegment(): void {
         // @ts-ignore
         let x = this._tailSegment.x;
