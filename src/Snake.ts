@@ -1,7 +1,7 @@
 class segment {
     private _x: number;
     private _y: number;
-
+    //todo: add color
     constructor(x: number, y: number) {
         this._x = x;
         this._y = y;
