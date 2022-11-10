@@ -34,8 +34,11 @@ class Snake implements Renderable{
     private _x: number = 0;
     private _y: number = 0;
     private _segments: segment[] = [];
+    //todo: ref to head segment
+    //todo: ref to tail segment
 
 
+    //todo: remove x, y from the snake because it is the head
     constructor(length: number, headColor: string, bodyColor: string, width: number, height: number, x: number, y: number) {
         this._length = length;
         this._headColor = headColor;
@@ -44,7 +47,7 @@ class Snake implements Renderable{
         this._height = height;
         this._x = x;
         this._y = y;
-
+        //todo: add segments
     }
 
     get length(): number {
@@ -87,6 +90,8 @@ class Snake implements Renderable{
         this._height = value;
     }
 
+    //todo: get x and y should be the head segment x and y
+    //todo: set x and y should be the head segment x and y
     get x(): number {
         return this._x;
     }
@@ -104,12 +109,16 @@ class Snake implements Renderable{
         this._y = value;
     }
 
+    //todo: addSegment. use the tail segment x and y to add a new segment and tail segment ref to the new segment
+
     render(context: CanvasRenderingContext2D): void {
         // Setting head color
         context.fillStyle = this.headColor;
         context.fillRect(this._x, this._y, this._width, this._height)
         // Setting body
         context.fillStyle = this.bodyColor;
+        //todo: render segments update x,y
+
 
     }
 }
