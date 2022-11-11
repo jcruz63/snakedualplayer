@@ -3,6 +3,7 @@ import RenderEngine from "./RenderEngine";
 import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
+import Player from "./Player";
 
 class Game {
     private _gameView: GameView;
@@ -10,12 +11,11 @@ class Game {
     private _startButton: HTMLButtonElement = document.getElementById("startButton") as HTMLButtonElement;
     private _stopButton: HTMLButtonElement = document.getElementById("stopButton") as HTMLButtonElement;
     private _renderEngine: RenderEngine;
-    private _snake: Snake;
-    private _apple: Apple;
+    private _apple: Apple | undefined;
     private _fps: number = 10;
     private _timer: number = 0;
-    private _score: number = 0;
-    private _controllers: Controller[] = [];
+    private _players: Player[] = [];
+
 
     constructor() {
         this._gameView = new GameView(10, 20, 20);
@@ -23,17 +23,28 @@ class Game {
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
+        this.initGame();
+    }
+
+    initGame = () => {
+        let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
+        let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
+        this._players.push(player1);
+
+
         let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
         let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-        let xSnake = this._gameView.gridSquareSize * 4
-        let ySnake = this._gameView.gridSquareSize * 4
-        this._snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, xSnake, ySnake);
+        if(xApple === snake.x && yApple === snake.y) {
+            xApple += this._gameView.gridSquareSize;
+        }
         this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
-        this._p1 = new Controller('w', 's', 'a', 'd', this._snake, this._gameView.gridSquareSize);
-        this._p2 = new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', this._apple, this._gameView.gridSquareSize);
+
+        this._renderEngine.addRenderable(snake);
+        this._renderEngine.addRenderable(this._apple);
     }
 
     startGame = () => {
+
         this.gameLoop();
         this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
     }
@@ -41,20 +52,28 @@ class Game {
     stopGame = () => {
         this._gameLoop && clearInterval(this._gameLoop);
     }
+
+
+
     gameLoop = () => {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
 
-        this._p1.update();
-        this._p2.update();
-        if (this._snake.x === this._apple.x && this._snake.y === this._apple.y) {
-            this._snake.addSegment();
-            this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-            this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-            this._score++;
-            console.log("The score is " + this._score);
-        }
-        this._renderEngine.addRenderable(this._snake);
-        this._renderEngine.addRenderable(this._apple);
+        this._players.forEach(player => {
+            player.controller.update();
+            // @ts-ignore
+            if (player.renderable.x === this._apple.x && player.renderable.y === this._apple.y) {
+                if(player.renderable instanceof Snake) {
+                    player.renderable.addSegment()
+                }
+                // @ts-ignore
+                this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+                // @ts-ignore
+                this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+                player.score++;
+                console.log("Player " + player.name + " score: " + player.score);
+            }
+        });
+
         this._renderEngine.render();
         // this._timer += 1;
         // if (this._timer % 10 == 0) {
