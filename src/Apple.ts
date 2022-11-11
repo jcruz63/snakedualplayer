@@ -40,10 +40,5 @@ class Apple implements Renderable {
         this._y = value;
     }
 
-    appleSpawner = () => { // .6 * 20 = 12 * 10 = 120
-        this._x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-        this._y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-    }
-
 }
 export default Apple;
