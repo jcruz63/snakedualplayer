@@ -25,7 +25,7 @@ class Game {
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
         this._snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4);
-        this._apple = new Apple(this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000");
+        this._apple = new Apple(this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView);
         this._p1 = new Controller('w', 's', 'a', 'd', this._snake, this._gameView.gridSquareSize);
         this._p2 = new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', this._apple, this._gameView.gridSquareSize);
     }
