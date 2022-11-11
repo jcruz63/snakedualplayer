@@ -1,13 +1,18 @@
+import gameView from "./GameView";
+
+
 class Apple implements Renderable {
     private _x: number;
     private _y: number;
     private _width: number;
     private _height: number;
     private _color: string;
+    private _gameView: gameView;
 
-    constructor(x: number, y: number, width: number, height: number, color: string) {
-        this._x = x;
-        this._y = y;
+    constructor(width: number, height: number, color: string, gameView: gameView) {
+        this._gameView = gameView;
+        this._x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+        this._y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
         this._width = width;
         this._height = height;
         this._color = color;
@@ -18,10 +23,6 @@ class Apple implements Renderable {
         context.fillRect(this._x, this._y, this._width, this._height);
     }
 
-    respawn(x: number, y: number) {
-        this._x = x;
-        this._y = y;
-    }
 
     get x(): number {
         return this._x;
@@ -38,6 +39,6 @@ class Apple implements Renderable {
     set y(value: number) {
         this._y = value;
     }
-}
 
+}
 export default Apple;
