@@ -3,7 +3,6 @@ import RenderEngine from "./RenderEngine";
 import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
-import apple from "./Apple";
 
 class Game {
     private _gameView: GameView;
@@ -24,8 +23,16 @@ class Game {
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
-        this._snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4);
-        this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView);
+        let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+        let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+        let xSnake = this._gameView.gridSquareSize * 4
+        let ySnake = this._gameView.gridSquareSize * 4
+        if (xApple == xSnake && yApple == ySnake) {
+            xApple += this._gameView.gridSquareSize;
+        }
+
+        this._snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, xSnake, ySnake);
+        this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
         this._p1 = new Controller('w', 's', 'a', 'd', this._snake, this._gameView.gridSquareSize);
         this._p2 = new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', this._apple, this._gameView.gridSquareSize);
     }

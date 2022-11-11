@@ -9,10 +9,10 @@ class Apple implements Renderable {
     private _color: string;
     private _gameView: gameView;
 
-    constructor(width: number, height: number, color: string, gameView: gameView) {
+    constructor(width: number, height: number, color: string, gameView: gameView, x: number, y: number) {
         this._gameView = gameView;
-        this._x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-        this._y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+        this._x = x;
+        this._y = y;
         this._width = width;
         this._height = height;
         this._color = color;
