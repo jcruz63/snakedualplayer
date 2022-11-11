@@ -12,10 +12,10 @@ class Game {
     private _renderEngine: RenderEngine;
     private _snake: Snake;
     private _apple: Apple;
-    private _p1: Controller;
-    private _p2: Controller;
     private _fps: number = 10;
     private _timer: number = 0;
+    private _score: number = 0;
+    private _controllers: Controller[] = [];
 
     constructor() {
         this._gameView = new GameView(10, 20, 20);
@@ -27,10 +27,6 @@ class Game {
         let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
         let xSnake = this._gameView.gridSquareSize * 4
         let ySnake = this._gameView.gridSquareSize * 4
-        if (xApple == xSnake && yApple == ySnake) {
-            xApple += this._gameView.gridSquareSize;
-        }
-
         this._snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, xSnake, ySnake);
         this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
         this._p1 = new Controller('w', 's', 'a', 'd', this._snake, this._gameView.gridSquareSize);
@@ -50,6 +46,13 @@ class Game {
 
         this._p1.update();
         this._p2.update();
+        if (this._snake.x === this._apple.x && this._snake.y === this._apple.y) {
+            this._snake.addSegment();
+            this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+            this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+            this._score++;
+            console.log("The score is " + this._score);
+        }
         this._renderEngine.addRenderable(this._snake);
         this._renderEngine.addRenderable(this._apple);
         this._renderEngine.render();
