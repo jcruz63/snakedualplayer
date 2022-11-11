@@ -9,13 +9,13 @@ class Apple implements Renderable {
     private _color: string;
     private _gameView: gameView;
 
-    constructor(x: number, y: number, width: number, height: number, color: string, gameView: gameView) {
-        this._x = x;
-        this._y = y;
+    constructor(width: number, height: number, color: string, gameView: gameView) {
+        this._gameView = gameView;
+        this._x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+        this._y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
         this._width = width;
         this._height = height;
         this._color = color;
-        this._gameView = gameView;
     }
 
     render(context: CanvasRenderingContext2D): void {
