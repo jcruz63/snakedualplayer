@@ -15,6 +15,7 @@ class Game {
     private _fps: number = 10;
     private _timer: number = 0;
     private _players: Player[] = [];
+    private _startMenu: HTMLDivElement = document.getElementById("startMenu") as HTMLDivElement;
 
 
     constructor() {
@@ -44,7 +45,6 @@ class Game {
     }
 
     startGame = () => {
-
         this.gameLoop();
         this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
     }
@@ -72,6 +72,8 @@ class Game {
                 player.score++;
                 console.log("Player " + player.name + " score: " + player.score);
             }
+
+
         });
 
         this._renderEngine.render();
