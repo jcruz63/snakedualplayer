@@ -72,8 +72,9 @@ class Game {
                 player.score++;
                 console.log("Player " + player.name + " score: " + player.score);
             }
-
-
+            if(player.score === 1){
+                this._fps++;
+            }
         });
 
         this._renderEngine.render();
