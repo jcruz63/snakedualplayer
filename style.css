@@ -21,6 +21,14 @@ body {
     justify-content: center;
 }
 
+#start {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 .title {
     font-family: monospace;
@@ -32,26 +40,8 @@ body {
 }
 
 
-#startButton {
-    background-color: #000000;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #000000;
-    color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    margin: auto;
-    padding: 10px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    width: 200px;
-    cursor: pointer;
-    position: center;
-}
 
-#stopButton {
+.button{
     background-color: #000000;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -68,3 +58,69 @@ body {
     width: 200px;
     cursor: pointer;
 }
+
+
+
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    width: 600px;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.htp-title {
+    font-family: Arial, serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+}
+
+.htp-p {
+    font-family: Arial;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
