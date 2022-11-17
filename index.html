@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
-        <canvas id="canvas" style="border: black 1px solid"></canvas>
-        <button id="startButton">Start</button>
-        <button id="stopButton">Stop</button>
+        <div>
+            <h1 class="title">Coinstrictor<span>&#x2122;</span></h1>
+            <canvas id="canvas"></canvas>
+            <br>
+            <button id="startButton">Start</button>
+            <button id="stopButton">Stop</button>
+            <div class="leaderboard">
+                <h1>Leaderboard</h1>
+                <div class="player1">
+                    <h3>Player 1</h3>
+                    <p id="player1Score">0</p>
+                    <div class="player2">
+                        <h3>Player 2</h3>
+                        <p id="player2Score">0</p>
+            </div>
+            <div id="startMenu">
+                <h2>Controls</h2>
+                <p>Player 1: W, A, S, D</p>
+                <p>Player 2: Arrow Keys</p>
+                <br>
+                <p>Number of players:</p>
+                <input type="number" id="numberOfPlayers" min="1" max="2" value="2">
+                <div id="howToPlayModal">
+                    <button id="trigger" class="button">How to play</button>
+                    <div class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">×</span>
+                            <h1 class="htp-title">Eat. Grow. Repeat.</h1> <br>
+                            <p class="htp-p">Learning how to play Snake does not require much. All you need is a computer or smartphone, quick reaction time, and a touch of skill.
+
+                                In almost every rendition of classic Snake, you can only move up, down, left or right either with arrow keys or swiping on a touch screen. No matter what version you play, the snake loves to eat. Eating is literally all it does.
+
+                                You’ll start each game with one green and one red square. The green square is your snake and the red is an apple. Move the snake around the screen and eat as many apples as you can until the screen is full of the snake’s body.
+
+                                Each time an apple is eaten, the snake will grow. In the original Snake game, your snake’s body will grow by one square each time it eats. However, in our version, your snake will grow by four squares for every one apple eaten! This added mechanic adds more of a challenge to the game: the longer the snake, the harder it is to control.</p> <br>
+                            <h1 class="htp-title">How To Play Snake</h1> <br>
+                            <p class="htp-p">There are only two rules you must follow when playing: don’t hit a wall and don’t bite your own tail. Crashing into a wall or your tail will end the game immediately. Your high score is calculated based on the number of squares you added to the snake. You win the game when there is no more room for your snake to grow.</p> <br>
+                            <h1 class="htp-title">Move Fast, Think Fast!</h1> <br>
+                            <p class="htp-p">Not only does your snake grow longer each time it eats, it moves faster than the traditional game as well.
+
+                                In order to master the Coinstricter, your reaction time will be tested. This snake moves quickly, so you’ll have to master reacting fast in order to turn away before you collide with the walls or tail. Those sharp turns can only be mastered by practice, so get going!
+
+                                To easily control the snake as it grows longer and longer, try sticking close by the wall. There are only four turns you have to make if you ride the sides of the screen. If your snake grows long enough, you can zig-zag around the screen as well.</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </body>
+<script src="src/modal.js"></script>
 <script src="dist/app.js"></script>
 </html>
