@@ -15,13 +15,10 @@ class Game {
     private _fps: number = 10;
     private _timer: number = 0;
     private _players: Player[] = [];
-    private _startMenu = document.getElementById("startMenu") as HTMLDivElement;
-    private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
-    private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
 
 
     constructor() {
-        this._gameView = new GameView(10, 60, 60);
+        this._gameView = new GameView(10, 20, 20);
         this._startButton.addEventListener("click", this.startGame.bind(this));
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
@@ -32,7 +29,6 @@ class Game {
     initGame = () => {
         let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
         let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
-        let player2 = new Player("jane", 123, snake , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake, this._gameView.gridSquareSize));
         this._players.push(player1);
 
 
@@ -51,7 +47,6 @@ class Game {
 
         this.gameLoop();
         this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
-        this._startMenu.style.display = "none";
     }
 
     stopGame = () => {
@@ -75,10 +70,8 @@ class Game {
                 // @ts-ignore
                 this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
                 player.score++;
-                this._player1Score.innerHTML = `${player.score}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
-
         });
 
         this._renderEngine.render();
