@@ -33,6 +33,7 @@ class Game {
     initGame = () => {
         let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
         let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
+        let player2 = new Player("jane", 123, snake , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake, this._gameView.gridSquareSize));
         this._players.push(player1);
 
 
@@ -75,7 +76,7 @@ class Game {
                 // @ts-ignore
                 this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
                 player.score++;
-                this._player1Score.innerHTML = `${player.score++}`;
+                this._player1Score.innerHTML = `${player.score}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
 
