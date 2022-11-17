@@ -4,7 +4,6 @@ import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
 import Player from "./Player";
-import Leaderboard from "./Leaderboard";
 
 class Game {
     private _gameView: GameView;
