@@ -4,6 +4,7 @@ import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
 import Player from "./Player";
+import Leaderboard from "./Leaderboard";
 
 class Game {
     private _gameView: GameView;
@@ -15,6 +16,9 @@ class Game {
     private _fps: number = 10;
     private _timer: number = 0;
     private _players: Player[] = [];
+    private _startMenu = document.getElementById("startMenu") as HTMLDivElement;
+    private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
+    private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
 
 
     constructor() {
@@ -47,6 +51,7 @@ class Game {
 
         this.gameLoop();
         this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
+        this._startMenu.style.display = "none";
     }
 
     stopGame = () => {
@@ -70,8 +75,10 @@ class Game {
                 // @ts-ignore
                 this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
                 player.score++;
+                this._player1Score.innerHTML = `${player.score++}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
+
         });
 
         this._renderEngine.render();

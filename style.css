@@ -12,6 +12,18 @@ body {
     background-color: black;
 }
 
+.leaderboard {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    float: right;
+}
+
 #startMenu {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
