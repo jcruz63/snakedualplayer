@@ -166,7 +166,7 @@ class Snake implements Renderable{
         this._segments.forEach((segment, index) => {
             context.fillStyle = segment.color;
             context.fillRect(segment.x, segment.y, this._width, this._height);
-            /*console.log(`Segment ${index} x: ${segment.x} y: ${segment.y}`);*/
+            // console.log(`Segment ${index} x: ${segment.x} y: ${segment.y}`);
         });
 
 

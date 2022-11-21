@@ -31,8 +31,9 @@ class Game {
 
     initGame = () => {
         let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
+        let snake2 = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5)
         let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
-        let player2 = new Player("Jane", 123, snake , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake, this._gameView.gridSquareSize));
+        let player2 = new Player("Jane", 123, snake2 , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake2, this._gameView.gridSquareSize));
         this._players.push(player1);
         this._players.push(player2);
 
@@ -45,6 +46,7 @@ class Game {
         this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
 
         this._renderEngine.addRenderable(snake);
+        this._renderEngine.addRenderable(snake2);
         this._renderEngine.addRenderable(this._apple);
     }
 
@@ -79,7 +81,7 @@ class Game {
                 this._player1Score.innerHTML = `${player.score}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
-
+            console.log("player name: " + player.name + " x: " + player.renderable.x + " y: " + player.renderable.y);
         });
 
         this._renderEngine.render();
