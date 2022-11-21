@@ -32,8 +32,9 @@ class Game {
     initGame = () => {
         let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
         let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
-        let player2 = new Player("jane", 123, snake , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake, this._gameView.gridSquareSize));
+        let player2 = new Player("Jane", 123, snake , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake, this._gameView.gridSquareSize));
         this._players.push(player1);
+        this._players.push(player2);
 
 
         let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
