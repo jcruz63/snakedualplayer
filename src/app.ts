@@ -4,6 +4,7 @@ import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
 import Player from "./Player";
+import SnakeFactory from "./SnakeFactory";
 
 class Game {
     private _gameView: GameView;
@@ -18,6 +19,7 @@ class Game {
     private _startMenu = document.getElementById("startMenu") as HTMLDivElement;
     private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
     private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
+    private _snakeFactory: SnakeFactory;
 
 
     constructor() {
@@ -26,11 +28,13 @@ class Game {
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
+        this._snakeFactory = new SnakeFactory(this._gameView);
         this.initGame();
     }
 
     initGame = () => {
-        let snake = new Snake(3, "#FFA500", "#00FF00", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 4, this._gameView.gridSquareSize * 4)
+        let snake = this._snakeFactory.createSnake();
+        let snake2 = new Snake(3, "#FFA500", "#ff0000", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5)
         let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
         let player2 = new Player("Jane", 123, snake2 , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake2, this._gameView.gridSquareSize));
         this._players.push(player1);
