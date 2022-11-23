@@ -4,8 +4,8 @@ html, body {
 }
 
 body {
-    background: rgb(0,255,239);
-    background: linear-gradient(90deg, rgba(0,255,239,1) 0%, rgba(95,6,158,1) 52%, rgba(0,212,255,1) 100%);
+    background-color: #06ae8f;
+
 }
 
 #canvas{

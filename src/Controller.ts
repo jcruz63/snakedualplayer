@@ -3,11 +3,11 @@ class Controller {
     private _down: string;
     private _left: string;
     private _right: string;
-    private _renderable: Renderable;
+    private _renderable: Renderable | null;
     private _direction: string = "Alt";
     private _tileSize: number;
 
-    constructor(up: string, down: string, left: string, right: string, renderable: Renderable, tileSize: number) {
+    constructor(up: string, down: string, left: string, right: string, renderable: Renderable | null, tileSize: number) {
         this._up = up;
         this._down = down;
         this._left = left;
@@ -24,11 +24,13 @@ class Controller {
         });
     }
     update() {
-        switch (this._direction) {
-            case 'up': this._renderable.y -= this._tileSize; break;
-            case 'down': this._renderable.y += this._tileSize; break;
-            case 'left': this._renderable.x -= this._tileSize; break;
-            case 'right': this._renderable.x += this._tileSize; break;
+        if (this._renderable) {
+            switch (this._direction) {
+                case 'up': this._renderable.y -= this._tileSize; break;
+                case 'down': this._renderable.y += this._tileSize; break;
+                case 'left': this._renderable.x -= this._tileSize; break;
+                case 'right': this._renderable.x += this._tileSize; break;
+            }
         }
     }
 }

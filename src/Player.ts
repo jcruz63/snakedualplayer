@@ -5,10 +5,10 @@ class Player {
     private _name: string;
     private _id: number;
     private _score: number;
-    private _renderable: Renderable;
+    private _renderable: Renderable | null;
     private _controller: Controller;
 
-    constructor(name: string, id: number, renderable: Renderable, controller: Controller) {
+    constructor(name: string, id: number, renderable: Renderable | null, controller: Controller) {
         this._name = name;
         this._id = id;
         this._score = 0;
@@ -41,11 +41,11 @@ class Player {
         this._score = value;
     }
 
-    get renderable(): Renderable {
+    get renderable(): Renderable | null {
         return this._renderable;
     }
 
-    set renderable(value: Renderable) {
+    set renderable(value: Renderable | null) {
         this._renderable = value;
     }
 

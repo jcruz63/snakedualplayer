@@ -34,23 +34,25 @@ class Game {
 
     initGame = () => {
         let snake = this._snakeFactory.createSnake();
-        let snake2 = new Snake(3, "#FFA500", "#ff0000", this._gameView.gridSquareSize, this._gameView.gridSquareSize, this._gameView.gridSquareSize * 5, this._gameView.gridSquareSize * 5)
-        let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
-        let player2 = new Player("Jane", 123, snake2 , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake2, this._gameView.gridSquareSize));
-        this._players.push(player1);
-        this._players.push(player2);
+        let snake2 = this._snakeFactory.createSnake();
+        if (snake && snake2) {
+            let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
+            let player2 = new Player("Jane", 123, snake2 , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake2, this._gameView.gridSquareSize));
+            this._players.push(player1);
+            this._players.push(player2);
 
 
-        let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-        let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-        if(xApple === snake.x && yApple === snake.y) {
-            xApple += this._gameView.gridSquareSize;
+            let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+            let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+            if(xApple === snake.x && yApple === snake.y) {
+                xApple += this._gameView.gridSquareSize;
+            }
+            this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
+
+            this._renderEngine.addRenderable(snake);
+            this._renderEngine.addRenderable(snake2);
+            this._renderEngine.addRenderable(this._apple);
         }
-        this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
-
-        this._renderEngine.addRenderable(snake);
-        this._renderEngine.addRenderable(snake2);
-        this._renderEngine.addRenderable(this._apple);
     }
 
     startGame = () => {
