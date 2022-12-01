@@ -5,13 +5,11 @@ class Controller {
     private _right: string;
     private _direction: string = "center";
 
-    constructor(up: string, down: string, left: string, right: string, renderable: Renderable | null, tileSize: number) {
+    constructor(up: string, down: string, left: string, right: string) {
         this._up = up;
         this._down = down;
         this._left = left;
         this._right = right;
-        this._renderable = renderable;
-        this._tileSize = tileSize;
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case this._up: this._direction = 'up'; break;
@@ -21,15 +19,13 @@ class Controller {
             }
         });
     }
-    update() {
-        if (this._renderable) {
-            switch (this._direction) {
-                case 'up': this._renderable.y -= this._tileSize; break;
-                case 'down': this._renderable.y += this._tileSize; break;
-                case 'left': this._renderable.x -= this._tileSize; break;
-                case 'right': this._renderable.x += this._tileSize; break;
-            }
-        }
+
+    get direction(): string {
+        return this._direction;
+    }
+
+    set direction(value: string) {
+        this._direction = value;
     }
 }
 

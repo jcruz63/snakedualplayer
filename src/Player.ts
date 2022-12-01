@@ -8,11 +8,11 @@ class Player {
     private _snake: Renderable | null;
     private _controller: Controller;
 
-    constructor(name: string, id: number, renderable: Renderable | null, controller: Controller) {
+    constructor(name: string, id: number, snake: Renderable | null, controller: Controller) {
         this._name = name;
         this._id = id;
         this._score = 0;
-        this._renderable = renderable;
+        this._snake = snake;
         this._controller = controller;
     }
 
@@ -55,6 +55,18 @@ class Player {
 
     set controller(value: Controller) {
         this._controller = value;
+    }
+
+    update() {
+        // if (this._snake) {
+        //     switch (this._direction) {
+        //         case 'up': this._snake.y -= this._tileSize; break;
+        //         case 'down': this._snake.y += this._tileSize; break;
+        //         case 'left': this._snake.x -= this._tileSize; break;
+        //         case 'right': this._snake.x += this._tileSize; break;
+        //     }
+        // }
+
     }
 }
 

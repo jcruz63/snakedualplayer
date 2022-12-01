@@ -33,6 +33,11 @@ class Segment {
     set color(value: string) {
         this._color = value;
     }
+
+    updatePosition(x: number, y: number){
+        this._x = x;
+        this._y = y;
+    }
 }
 
 class Snake implements Renderable{
