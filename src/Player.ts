@@ -5,7 +5,7 @@ class Player {
     private _name: string;
     private _id: number;
     private _score: number;
-    private _renderable: Renderable | null;
+    private _snake: Renderable | null;
     private _controller: Controller;
 
     constructor(name: string, id: number, renderable: Renderable | null, controller: Controller) {
@@ -41,12 +41,12 @@ class Player {
         this._score = value;
     }
 
-    get renderable(): Renderable | null {
-        return this._renderable;
+    get snake(): Renderable | null {
+        return this._snake;
     }
 
-    set renderable(value: Renderable | null) {
-        this._renderable = value;
+    set snake(value: Renderable | null) {
+        this._snake = value;
     }
 
     get controller(): Controller {

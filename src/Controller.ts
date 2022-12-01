@@ -3,9 +3,7 @@ class Controller {
     private _down: string;
     private _left: string;
     private _right: string;
-    private _renderable: Renderable | null;
-    private _direction: string = "Alt";
-    private _tileSize: number;
+    private _direction: string = "center";
 
     constructor(up: string, down: string, left: string, right: string, renderable: Renderable | null, tileSize: number) {
         this._up = up;

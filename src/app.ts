@@ -74,9 +74,9 @@ class Game {
         this._players.forEach(player => {
             player.controller.update();
             // @ts-ignore
-            if (player.renderable.x === this._apple.x && player.renderable.y === this._apple.y) {
-                if(player.renderable instanceof Snake) {
-                    player.renderable.addSegment()
+            if (player.snake.x === this._apple.x && player.snake.y === this._apple.y) {
+                if(player.snake instanceof Snake) {
+                    player.snake.addSegment()
                 }
                 // @ts-ignore
                 this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
@@ -86,7 +86,7 @@ class Game {
                 this._player1Score.innerHTML = `${player.score}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
-            console.log("player name: " + player.name + " x: " + player.renderable.x + " y: " + player.renderable.y);
+            console.log("player name: " + player.name + " x: " + player.snake.x + " y: " + player.snake.y);
         });
 
         this._renderEngine.render();
