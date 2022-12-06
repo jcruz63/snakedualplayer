@@ -4,7 +4,7 @@ import Snake from "./Snake";
 import Apple from "./Apple";
 import Controller from "./Controller";
 import Player from "./Player";
-import SnakeFactory from "./SnakeFactory";
+import PlayerFactory from "./PlayerFactory";
 
 class Game {
     private _gameView: GameView;
@@ -19,8 +19,7 @@ class Game {
     private _startMenu = document.getElementById("startMenu") as HTMLDivElement;
     private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
     private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
-    private _snakeFactory: SnakeFactory;
-
+    private _playerFactory: PlayerFactory;
 
     constructor() {
         this._gameView = new GameView(10, 60, 60);
@@ -28,31 +27,31 @@ class Game {
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
-        this._snakeFactory = new SnakeFactory(this._gameView);
+        this._playerFactory = new PlayerFactory(this._gameView);
         this.initGame();
     }
 
     initGame = () => {
-        let snake = this._snakeFactory.createSnake();
-        let snake2 = this._snakeFactory.createSnake();
-        if (snake && snake2) {
-            let player1 = new Player("John", 123, snake , new Controller('w', 's', 'a', 'd', snake, this._gameView.gridSquareSize));
-            let player2 = new Player("Jane", 123, snake2 , new Controller('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', snake2, this._gameView.gridSquareSize));
+            let player1 = this._playerFactory.createPlayer();
+            let player2 = this._playerFactory.createPlayer();
             this._players.push(player1);
             this._players.push(player2);
 
 
             let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
             let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-            if(xApple === snake.x && yApple === snake.y) {
+            // @ts-ignore
+        if(xApple === player1.snake.x && yApple === player1.snake.y) {
                 xApple += this._gameView.gridSquareSize;
             }
             this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
 
-            this._renderEngine.addRenderable(snake);
-            this._renderEngine.addRenderable(snake2);
+            // @ts-ignore
+        this._renderEngine.addRenderable(player1.snake);
+            // @ts-ignore
+        this._renderEngine.addRenderable(player2.snake);
             this._renderEngine.addRenderable(this._apple);
-        }
+
     }
 
     startGame = () => {

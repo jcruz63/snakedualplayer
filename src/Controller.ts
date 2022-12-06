@@ -1,3 +1,5 @@
+import Keyset from "./Keyset";
+
 class Controller {
     private _up: string;
     private _down: string;
@@ -5,11 +7,11 @@ class Controller {
     private _right: string;
     private _direction: string = "center";
 
-    constructor(up: string, down: string, left: string, right: string) {
-        this._up = up;
-        this._down = down;
-        this._left = left;
-        this._right = right;
+    constructor(keyset: Keyset) {
+        this._up = keyset.up;
+        this._down = keyset.down;
+        this._left = keyset.left;
+        this._right = keyset.right;
         window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case this._up: this._direction = 'up'; break;
