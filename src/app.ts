@@ -5,6 +5,7 @@ import Apple from "./Apple";
 import Controller from "./Controller";
 import Player from "./Player";
 import PlayerFactory from "./PlayerFactory";
+import GameController from "./GameController";
 
 class Game {
     private _gameView: GameView;
@@ -19,7 +20,7 @@ class Game {
     private _startMenu = document.getElementById("startMenu") as HTMLDivElement;
     private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
     private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
-    private _playerFactory: PlayerFactory;
+    private _gameController: GameController;
 
     constructor() {
         this._gameView = new GameView(10, 60, 60);
@@ -27,35 +28,28 @@ class Game {
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
-        this._playerFactory = new PlayerFactory(this._gameView);
-        this.initGame();
+        this._gameController = new GameController(this._renderEngine, this._gameView);
+
+
     }
 
     initGame = () => {
-            let player1 = this._playerFactory.createPlayer();
-            let player2 = this._playerFactory.createPlayer();
-            this._players.push(player1);
-            this._players.push(player2);
-
+            this._players = this._gameController.initialize();
 
             let xApple = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
             let yApple = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
             // @ts-ignore
-        if(xApple === player1.snake.x && yApple === player1.snake.y) {
+        if(xApple === this._players[0].snake.x && yApple === this._players[0].snake.y) {
                 xApple += this._gameView.gridSquareSize;
             }
             this._apple = new Apple(this._gameView.gridSquareSize, this._gameView.gridSquareSize, "#FF0000", this._gameView, xApple, yApple);
 
-            // @ts-ignore
-        this._renderEngine.addRenderable(player1.snake);
-            // @ts-ignore
-        this._renderEngine.addRenderable(player2.snake);
             this._renderEngine.addRenderable(this._apple);
 
     }
 
     startGame = () => {
-
+        this.initGame();
         this.gameLoop();
         this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
         this._startMenu.style.display = "none";
@@ -71,7 +65,7 @@ class Game {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
 
         this._players.forEach(player => {
-            player.controller.update();
+            player.update();
             // @ts-ignore
             if (player.snake.x === this._apple.x && player.snake.y === this._apple.y) {
                 if(player.snake instanceof Snake) {
@@ -85,6 +79,7 @@ class Game {
                 this._player1Score.innerHTML = `${player.score}`;
                 console.log("Player " + player.name + " score: " + player.score);
             }
+            // @ts-ignore
             console.log("player name: " + player.name + " x: " + player.snake.x + " y: " + player.snake.y);
         });
 

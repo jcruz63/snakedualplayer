@@ -1,17 +1,17 @@
 {
   "keysets": [
     {
-      "up": "w", "down": "s", "left": "a", "right": "d"
+      "up": "KeyW", "down": "KeyS", "left": "KeyA", "right": "KeyD"
     },
     {
       "up": "ArrowUp", "down": "ArrowDown", "left": "ArrowLeft", "right": "ArrowRight"
     },
     {
-      "up": "i", "down": "k", "left": "j", "right": "l"
+      "up": "KeyI", "down": "KeyK", "left": "KeyJ", "right": "KeyL"
     },
 
     {
-      "up": "8", "down": "5", "left": "4", "right": "6"
+      "up": "Numpad8", "down": "Numpad5", "left": "Numpad4", "right": "Numpad6"
     }
   ]
 }

@@ -40,5 +40,9 @@ class Apple implements Renderable {
         this._y = value;
     }
 
+    get width(): number {
+        return this._width;
+    }
+
 }
 export default Apple;

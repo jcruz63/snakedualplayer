@@ -13,7 +13,7 @@ class Controller {
         this._left = keyset.left;
         this._right = keyset.right;
         window.addEventListener('keydown', (event) => {
-            switch (event.key) {
+            switch (event.code) {
                 case this._up: this._direction = 'up'; break;
                 case this._down: this._direction = 'down'; break;
                 case this._left: this._direction = 'left'; break;

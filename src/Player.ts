@@ -57,15 +57,19 @@ class Player {
         this._controller = value;
     }
 
+
     update() {
-        // if (this._snake) {
-        //     switch (this._direction) {
-        //         case 'up': this._snake.y -= this._tileSize; break;
-        //         case 'down': this._snake.y += this._tileSize; break;
-        //         case 'left': this._snake.x -= this._tileSize; break;
-        //         case 'right': this._snake.x += this._tileSize; break;
-        //     }
-        // }
+        let direction = this._controller.direction;
+
+
+        if (this._snake) {
+            switch (direction) {
+                case 'up': this._snake.y -= this._snake.width; break;
+                case 'down': this._snake.y += this._snake.width; break;
+                case 'left': this._snake.x -= this._snake.width; break;
+                case 'right': this._snake.x += this._snake.width; break;
+            }
+        }
 
     }
 }
