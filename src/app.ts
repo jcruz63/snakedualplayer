@@ -23,7 +23,7 @@ class Game {
     private _gameController: GameController;
 
     constructor() {
-        this._gameView = new GameView(10, 60, 60);
+        this._gameView = new GameView(10, 20, 20);
         this._startButton.addEventListener("click", this.startGame.bind(this));
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
