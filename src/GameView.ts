@@ -17,6 +17,13 @@ class GameView {
         this._canvas.height = this._gridSquareSize * this._gridYSquares;
     }
 
+    get width(): number {
+        return this._canvas.width;
+    }
+
+    get height(): number {
+        return this._canvas.height;
+    }
 
     get gridSquareSize(): number {
         return this._gridSquareSize;

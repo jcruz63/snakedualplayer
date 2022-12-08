@@ -1,0 +1,1 @@
+export default interface Keyset {up: string, down: string, left: string, right: string};
