@@ -17,4 +17,4 @@ createPlayer(): Player {
    }
 }
 
-export default PlayerFactory;t
+export default PlayerFactory;
