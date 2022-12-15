@@ -68,23 +68,6 @@ class Game {
 
         this._players.forEach(player => {
             player.update();
-            // @ts-ignore
-            if()
-
-            if (this._collisionDetection.checkObjCollision(player.snake, this._apple)) {
-                if(player.snake instanceof Snake) {
-                    player.snake.addSegment()
-                }
-                // @ts-ignore
-                this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-                // @ts-ignore
-                this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-                player.score++;
-                this._player1Score.innerHTML = `${player.score}`;
-                console.log("Player " + player.name + " score: " + player.score);
-            }
-            // @ts-ignore
-            console.log("player name: " + player.name + " x: " + player.snake.x + " y: " + player.snake.y);
         });
 
         this._renderEngine.render();
