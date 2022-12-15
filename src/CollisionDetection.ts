@@ -5,7 +5,7 @@ class CollisionDetection {
         return obj1.x === obj2.x && obj1.y === obj2.y;
     }
 
-    checkWallCollision(gameView: GameView, obj: Renderable) {
+    checkWallCollision(gameView: GameView, obj: Renderable): boolean {
     return obj.x < 0 || obj.x >= gameView.width || obj.y < 0 || obj.y >= gameView.height;
     }
 

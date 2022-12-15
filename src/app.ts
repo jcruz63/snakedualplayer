@@ -6,6 +6,7 @@ import Controller from "./Controller";
 import Player from "./Player";
 import PlayerFactory from "./PlayerFactory";
 import GameController from "./GameController";
+import CollisionDetection from "./CollisionDetection";
 
 class Game {
     private _gameView: GameView;
@@ -21,15 +22,16 @@ class Game {
     private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
     private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
     private _gameController: GameController;
+    private _collisionDetection: CollisionDetection;
 
     constructor() {
-        this._gameView = new GameView(10, 20, 20);
+        this._gameView = new GameView(10, 60, 60);
         this._startButton.addEventListener("click", this.startGame.bind(this));
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
         this._gameController = new GameController(this._renderEngine, this._gameView);
-
+        this._collisionDetection = new CollisionDetection();
 
     }
 
@@ -67,7 +69,9 @@ class Game {
         this._players.forEach(player => {
             player.update();
             // @ts-ignore
-            if (player.snake.x === this._apple.x && player.snake.y === this._apple.y) {
+            if()
+
+            if (this._collisionDetection.checkObjCollision(player.snake, this._apple)) {
                 if(player.snake instanceof Snake) {
                     player.snake.addSegment()
                 }
