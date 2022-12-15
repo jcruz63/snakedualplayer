@@ -5,4 +5,5 @@ interface Renderable {
     set x(value: number);
     get x(): number;
     get width(): number;
+    checkCollision(obj: Renderable): string | undefined;
 }

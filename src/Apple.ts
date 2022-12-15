@@ -44,5 +44,9 @@ class Apple implements Renderable {
         return this._width;
     }
 
+    checkCollision(obj: Renderable): string | undefined {
+        return undefined;
+    }
+
 }
 export default Apple;

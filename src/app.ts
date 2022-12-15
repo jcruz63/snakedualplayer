@@ -7,6 +7,7 @@ import GameController from "./GameController";
 import CollisionDetection from "./CollisionDetection";
 import player from "./Player";
 import collisionDetection from "./CollisionDetection";
+import { Segment } from "./Snake";
 
 class Game {
     private _gameView: GameView;
@@ -63,30 +64,57 @@ class Game {
     gameLoop = () => {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
 
+
+
         this._players.forEach(player => {
             player.update();
         });
 
         this._renderEngine.render();
 
-        let collision = [];
-        //          i   j
-        //[p1 ,p2, p3 ,p4]
-        //todo: push x,y into Map
-        for (let i = 0, j = 1; i < this._players.length - 1; i++, j++) {
-            // @ts-ignore
-            if(collisionDetection.checkObjCollision(this._players[i].snake, this._players[j].snake)){
-                collision.push(this._players[i]);
-                collision.push(this._players[j]);
-            }
-        }
+        let collisions = [];
 
-        collision.forEach(collision => {
-            this._renderEngine.removeRenderable(collision.snake);
-            this._players = this._players.filter(player => {
-                return player != collision
-            })
+        //check for all player collisions
+        for(let i = 0; i < this._players.length -1; i++) {
+            for(let j = i + 1; j < this._players.length; j++) {
+                let collision = this._players[j].snake.checkCollision(<Renderable>this._players[i].snake);
+                if(collision === 'head') {
+                    collisions.push(
+                    {
+                        attacker: this._players[i],
+                        defender: this._players[j],
+                        type: 'head'
+                    }
+                    )
+                } else if (collision === 'body') {
+                    collisions.push(
+                    {
+                        attacker: this._players[i],
+                        defender: this._players[j],
+                        type: 'body'
+                    }
+                    )
+                }
+
+                }
+            }
+
+        //resolve all collisions
+        collisions.forEach(collision => {
+            if(collision.type === 'head') {
+                this._renderEngine.removeRenderable(collision.defender.snake);
+                this._renderEngine.removeRenderable(collision.attacker.snake);
+                this._players.splice(this._players.indexOf(collision.defender), 1);
+                this._players.splice(this._players.indexOf(collision.attacker), 1);
+            } else if (collision.type === 'body') {
+                this._renderEngine.removeRenderable(collision.defender.snake);
+                this._players.splice(this._players.indexOf(collision.defender), 1);
+                collision.attacker.snake.addSegment();
+            }
         })
+
+
+
 
 
 
