@@ -2,11 +2,11 @@ import GameView from "./GameView";
 import RenderEngine from "./RenderEngine";
 import Snake from "./Snake";
 import Apple from "./Apple";
-import Controller from "./Controller";
 import Player from "./Player";
-import PlayerFactory from "./PlayerFactory";
 import GameController from "./GameController";
 import CollisionDetection from "./CollisionDetection";
+import player from "./Player";
+import collisionDetection from "./CollisionDetection";
 
 class Game {
     private _gameView: GameView;
@@ -22,7 +22,6 @@ class Game {
     private _player1Score = document.getElementById("player1Score") as HTMLDivElement;
     private _player2Score = document.getElementById("player2Score") as HTMLDivElement;
     private _gameController: GameController;
-    private _collisionDetection: CollisionDetection;
 
     constructor() {
         this._gameView = new GameView(10, 60, 60);
@@ -31,8 +30,6 @@ class Game {
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
         this._gameController = new GameController(this._renderEngine, this._gameView);
-        this._collisionDetection = new CollisionDetection();
-
     }
 
     initGame = () => {
@@ -71,6 +68,28 @@ class Game {
         });
 
         this._renderEngine.render();
+
+        let collision = [];
+        //          i   j
+        //[p1 ,p2, p3 ,p4]
+        //todo: push x,y into Map
+        for (let i = 0, j = 1; i < this._players.length - 1; i++, j++) {
+            // @ts-ignore
+            if(collisionDetection.checkObjCollision(this._players[i].snake, this._players[j].snake)){
+                collision.push(this._players[i]);
+                collision.push(this._players[j]);
+            }
+        }
+
+        collision.forEach(collision => {
+            this._renderEngine.removeRenderable(collision.snake);
+            this._players = this._players.filter(player => {
+                return player != collision
+            })
+        })
+
+
+
         // this._timer += 1;
         // if (this._timer % 10 == 0) {
         //     this._fps += 1;
