@@ -65,6 +65,10 @@ class GameView {
     set context(value: CanvasRenderingContext2D) {
         this._context = value;
     }
+
+    isInBounds(x: number, y: number): boolean {
+        return x >= 0 && x < this._canvas.width && y >= 0 && y < this._canvas.height;
+    }
 }
 
 export default GameView;

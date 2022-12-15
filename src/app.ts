@@ -70,7 +70,24 @@ class Game {
             player.update();
         });
 
+        //check if apple collision
+        this._players.forEach(player => {
+            if(this._apple && this._apple.checkCollision(player.snake)) {
+                player.score++;
+                player.snake.addSegment();
+            }
+        })
+
         this._renderEngine.render();
+
+        //check if player is in bounds
+        this._players.forEach(player => {
+            if(!this._gameView.isInBounds(player.snake.x, player.snake.y)) {
+                this._renderEngine.removeRenderable(player.snake);
+                this._players.splice(this._players.indexOf(player), 1);
+                console.log(`Player ${player.id} is out of bounds`);
+            }
+        })
 
         let collisions = [];
 
@@ -110,20 +127,16 @@ class Game {
                 this._renderEngine.removeRenderable(collision.defender.snake);
                 this._players.splice(this._players.indexOf(collision.defender), 1);
                 collision.attacker.snake.addSegment();
+                collision.attacker.score++;
             }
         })
 
 
 
-
-
-
-        // this._timer += 1;
-        // if (this._timer % 10 == 0) {
-        //     this._fps += 1;
-        //     this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
-        // }
-        console.log("game loop");
+        if(this._players.length === 1) {
+            this.stopGame();
+            console.log(`Player ${this._players[0].id} with score ${this._players[0].score} wins!`);
+        }
     }
 }
 
