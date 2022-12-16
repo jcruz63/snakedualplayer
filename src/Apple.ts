@@ -40,5 +40,19 @@ class Apple implements Renderable {
         this._y = value;
     }
 
+    get width(): number {
+        return this._width;
+    }
+
+    checkCollision(obj: Renderable): string | undefined {
+        //check if obj is in the same position as the apple
+        if (obj.x === this._x && obj.y === this._y) {
+            this._x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
+            this._y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
+            return 'collision';
+        }
+        return undefined;
+    }
+
 }
 export default Apple;

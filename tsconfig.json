@@ -2,13 +2,16 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "ES2015",
+    "moduleResolution": "node",
     "outDir": "./dist",
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"

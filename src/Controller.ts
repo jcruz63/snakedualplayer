@@ -1,21 +1,19 @@
+import Keyset from "./Keyset";
+
 class Controller {
     private _up: string;
     private _down: string;
     private _left: string;
     private _right: string;
-    private _renderable: Renderable;
-    private _direction: string = "Alt";
-    private _tileSize: number;
+    private _direction: string = "center";
 
-    constructor(up: string, down: string, left: string, right: string, renderable: Renderable, tileSize: number) {
-        this._up = up;
-        this._down = down;
-        this._left = left;
-        this._right = right;
-        this._renderable = renderable;
-        this._tileSize = tileSize;
+    constructor(keyset: Keyset) {
+        this._up = keyset.up;
+        this._down = keyset.down;
+        this._left = keyset.left;
+        this._right = keyset.right;
         window.addEventListener('keydown', (event) => {
-            switch (event.key) {
+            switch (event.code) {
                 case this._up: this._direction = 'up'; break;
                 case this._down: this._direction = 'down'; break;
                 case this._left: this._direction = 'left'; break;
@@ -23,13 +21,13 @@ class Controller {
             }
         });
     }
-    update() {
-        switch (this._direction) {
-            case 'up': this._renderable.y -= this._tileSize; break;
-            case 'down': this._renderable.y += this._tileSize; break;
-            case 'left': this._renderable.x -= this._tileSize; break;
-            case 'right': this._renderable.x += this._tileSize; break;
-        }
+
+    get direction(): string {
+        return this._direction;
+    }
+
+    set direction(value: string) {
+        this._direction = value;
     }
 }
 

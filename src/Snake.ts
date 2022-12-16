@@ -1,4 +1,4 @@
-class Segment {
+export class Segment {
     private _x: number;
     private _y: number;
     private _color: string;
@@ -32,6 +32,11 @@ class Segment {
 
     set color(value: string) {
         this._color = value;
+    }
+
+    updatePosition(x: number, y: number){
+        this._x = x;
+        this._y = y;
     }
 }
 
@@ -161,12 +166,28 @@ class Snake implements Renderable{
         this._segments.push(this._tailSegment);
     }
 
+    checkCollision(obj: Renderable): string | undefined {
+        let collision = undefined;
+        this._segments.forEach((segment, pos) => {
+              if(segment.x === obj.x && segment.y === obj.y){
+                    if(pos === 0){
+                        collision = 'head';
+                    }
+                    else {
+                        collision = 'body';
+                    }
+                }
+        })
+
+        return collision;
+    }
+
     render(context: CanvasRenderingContext2D): void {
 
         this._segments.forEach((segment, index) => {
             context.fillStyle = segment.color;
             context.fillRect(segment.x, segment.y, this._width, this._height);
-            /*console.log(`Segment ${index} x: ${segment.x} y: ${segment.y}`);*/
+            // console.log(`Segment ${index} x: ${segment.x} y: ${segment.y}`);
         });
 
 

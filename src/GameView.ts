@@ -17,6 +17,13 @@ class GameView {
         this._canvas.height = this._gridSquareSize * this._gridYSquares;
     }
 
+    get width(): number {
+        return this._canvas.width;
+    }
+
+    get height(): number {
+        return this._canvas.height;
+    }
 
     get gridSquareSize(): number {
         return this._gridSquareSize;
@@ -57,6 +64,10 @@ class GameView {
 
     set context(value: CanvasRenderingContext2D) {
         this._context = value;
+    }
+
+    isInBounds(x: number, y: number): boolean {
+        return x >= 0 && x < this._canvas.width && y >= 0 && y < this._canvas.height;
     }
 }
 

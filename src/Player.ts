@@ -1,18 +1,19 @@
 import Controller from "./Controller";
+import Snake from "./Snake";
 
 class Player {
 
     private _name: string;
     private _id: number;
     private _score: number;
-    private _renderable: Renderable;
+    private _snake: Snake;
     private _controller: Controller;
 
-    constructor(name: string, id: number, renderable: Renderable, controller: Controller) {
+    constructor(name: string, id: number, snake: Snake, controller: Controller) {
         this._name = name;
         this._id = id;
         this._score = 0;
-        this._renderable = renderable;
+        this._snake = snake;
         this._controller = controller;
     }
 
@@ -41,12 +42,12 @@ class Player {
         this._score = value;
     }
 
-    get renderable(): Renderable {
-        return this._renderable;
+    get snake(): Snake {
+        return this._snake;
     }
 
-    set renderable(value: Renderable) {
-        this._renderable = value;
+    set snake(value: Snake) {
+        this._snake = value;
     }
 
     get controller(): Controller {
@@ -55,6 +56,22 @@ class Player {
 
     set controller(value: Controller) {
         this._controller = value;
+    }
+
+
+    update() {
+        let direction = this._controller.direction;
+
+
+        if (this._snake) {
+            switch (direction) {
+                case 'up': this._snake.y -= this._snake.width; break;
+                case 'down': this._snake.y += this._snake.width; break;
+                case 'left': this._snake.x -= this._snake.width; break;
+                case 'right': this._snake.x += this._snake.width; break;
+            }
+        }
+
     }
 }
 
