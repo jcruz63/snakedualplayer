@@ -2,10 +2,12 @@ import GameView from "./GameView";
 import RenderEngine from "./RenderEngine";
 import Snake from "./Snake";
 import Apple from "./Apple";
-import Controller from "./Controller";
 import Player from "./Player";
-import PlayerFactory from "./PlayerFactory";
 import GameController from "./GameController";
+import CollisionDetection from "./CollisionDetection";
+import player from "./Player";
+import collisionDetection from "./CollisionDetection";
+import { Segment } from "./Snake";
 
 class Game {
     private _gameView: GameView;
@@ -23,14 +25,12 @@ class Game {
     private _gameController: GameController;
 
     constructor() {
-        this._gameView = new GameView(10, 20, 20);
+        this._gameView = new GameView(10, 60, 60);
         this._startButton.addEventListener("click", this.startGame.bind(this));
         this._stopButton.addEventListener("click", this.stopGame.bind(this));
         this._gameLoop = null;
         this._renderEngine = new RenderEngine(this._gameView.context);
         this._gameController = new GameController(this._renderEngine, this._gameView);
-
-
     }
 
     initGame = () => {
@@ -64,32 +64,82 @@ class Game {
     gameLoop = () => {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
 
+
+        // O(N)
         this._players.forEach(player => {
             player.update();
-            // @ts-ignore
-            if (player.snake.x === this._apple.x && player.snake.y === this._apple.y) {
-                if(player.snake instanceof Snake) {
-                    player.snake.addSegment()
-                }
-                // @ts-ignore
-                this._apple.x = Math.floor(Math.random() * this._gameView.gridXSquares) * this._gameView.gridSquareSize;
-                // @ts-ignore
-                this._apple.y = Math.floor(Math.random() * this._gameView.gridYSquares) * this._gameView.gridSquareSize;
-                player.score++;
-                this._player1Score.innerHTML = `${player.score}`;
-                console.log("Player " + player.name + " score: " + player.score);
-            }
-            // @ts-ignore
-            console.log("player name: " + player.name + " x: " + player.snake.x + " y: " + player.snake.y);
         });
 
+        //check if apple collision
+        this._players.forEach(player => {
+            if(this._apple && this._apple.checkCollision(player.snake)) {
+                player.score++;
+                player.snake.addSegment();
+            }
+        })
+
+        // O(N)
         this._renderEngine.render();
-        // this._timer += 1;
-        // if (this._timer % 10 == 0) {
-        //     this._fps += 1;
-        //     this._gameLoop = setInterval(this.gameLoop, 1000 / this._fps);
-        // }
-        console.log("game loop");
+
+        //check if player is in bounds
+        this._players.forEach(player => {
+            if(!this._gameView.isInBounds(player.snake.x, player.snake.y)) {
+                this._renderEngine.removeRenderable(player.snake);
+                this._players.splice(this._players.indexOf(player), 1);
+                console.log(`Player ${player.id} is out of bounds`);
+            }
+        })
+
+        let collisions = [];
+
+        //check for all player collisions
+        // O(N^2)
+        for(let i = 0; i < this._players.length -1; i++) {
+            for(let j = i + 1; j < this._players.length; j++) {
+                let collision = this._players[j].snake.checkCollision(<Renderable>this._players[i].snake);
+                if(collision === 'head') {
+                    collisions.push(
+                    {
+                        attacker: this._players[i],
+                        defender: this._players[j],
+                        type: 'head'
+                    }
+                    )
+                } else if (collision === 'body') {
+                    collisions.push(
+                    {
+                        attacker: this._players[i],
+                        defender: this._players[j],
+                        type: 'body'
+                    }
+                    )
+                }
+
+                }
+            }
+
+        //resolve all collisions
+        //O(N)
+        collisions.forEach(collision => {
+            if(collision.type === 'head') {
+                this._renderEngine.removeRenderable(collision.defender.snake);
+                this._renderEngine.removeRenderable(collision.attacker.snake);
+                this._players.splice(this._players.indexOf(collision.defender), 1);
+                this._players.splice(this._players.indexOf(collision.attacker), 1);
+            } else if (collision.type === 'body') {
+                this._renderEngine.removeRenderable(collision.defender.snake);
+                this._players.splice(this._players.indexOf(collision.defender), 1);
+                collision.attacker.snake.addSegment();
+                collision.attacker.score++;
+            }
+        })
+
+        // O(N) + O(N^2) + O(N) + O(N) = O(N^2)   // O(3N) + O(N^2) = O(3N + N^2) -> O(N^2)
+
+        if(this._players.length === 1) {
+            this.stopGame();
+            console.log(`Player ${this._players[0].id} with score ${this._players[0].score} wins!`);
+        }
     }
 }
 

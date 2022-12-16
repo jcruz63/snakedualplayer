@@ -1,14 +1,15 @@
 import Controller from "./Controller";
+import Snake from "./Snake";
 
 class Player {
 
     private _name: string;
     private _id: number;
     private _score: number;
-    private _snake: Renderable | null;
+    private _snake: Snake;
     private _controller: Controller;
 
-    constructor(name: string, id: number, snake: Renderable | null, controller: Controller) {
+    constructor(name: string, id: number, snake: Snake, controller: Controller) {
         this._name = name;
         this._id = id;
         this._score = 0;
@@ -41,11 +42,11 @@ class Player {
         this._score = value;
     }
 
-    get snake(): Renderable | null {
+    get snake(): Snake {
         return this._snake;
     }
 
-    set snake(value: Renderable | null) {
+    set snake(value: Snake) {
         this._snake = value;
     }
 

@@ -1,4 +1,4 @@
-class Segment {
+export class Segment {
     private _x: number;
     private _y: number;
     private _color: string;
@@ -164,6 +164,22 @@ class Snake implements Renderable{
         let y = this._tailSegment.y + this._height;
         this._tailSegment = new Segment(x, y, this._bodyColor);
         this._segments.push(this._tailSegment);
+    }
+
+    checkCollision(obj: Renderable): string | undefined {
+        let collision = undefined;
+        this._segments.forEach((segment, pos) => {
+              if(segment.x === obj.x && segment.y === obj.y){
+                    if(pos === 0){
+                        collision = 'head';
+                    }
+                    else {
+                        collision = 'body';
+                    }
+                }
+        })
+
+        return collision;
     }
 
     render(context: CanvasRenderingContext2D): void {

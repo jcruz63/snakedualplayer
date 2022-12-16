@@ -50,14 +50,11 @@ class SnakeFactory {
 
 
 
-    createSnake = (): Snake | null => {
-        if (SnakeFactory._counter < this._maxNumberSnakes) {
+    createSnake = (): Snake => {
             let startingData = this.getStartingData();
             let snake = new Snake(SnakeFactory._startingLength, startingData.headColor, startingData.bodyColor, this._gameView.gridSquareSize, this._gameView.gridSquareSize, startingData.x, startingData.y);
             SnakeFactory._counter++;
             return snake;
-        }
-        return null;
     }
 
 }
