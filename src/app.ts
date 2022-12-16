@@ -65,7 +65,7 @@ class Game {
         this._gameView.context.clearRect(0, 0, this._gameView.canvas.width, this._gameView.canvas.height);
 
 
-
+        // O(N)
         this._players.forEach(player => {
             player.update();
         });
@@ -78,6 +78,7 @@ class Game {
             }
         })
 
+        // O(N)
         this._renderEngine.render();
 
         //check if player is in bounds
@@ -92,6 +93,7 @@ class Game {
         let collisions = [];
 
         //check for all player collisions
+        // O(N^2)
         for(let i = 0; i < this._players.length -1; i++) {
             for(let j = i + 1; j < this._players.length; j++) {
                 let collision = this._players[j].snake.checkCollision(<Renderable>this._players[i].snake);
@@ -117,6 +119,7 @@ class Game {
             }
 
         //resolve all collisions
+        //O(N)
         collisions.forEach(collision => {
             if(collision.type === 'head') {
                 this._renderEngine.removeRenderable(collision.defender.snake);
@@ -131,7 +134,7 @@ class Game {
             }
         })
 
-
+        // O(N) + O(N^2) + O(N) + O(N) = O(N^2)   // O(3N) + O(N^2) = O(3N + N^2) -> O(N^2)
 
         if(this._players.length === 1) {
             this.stopGame();
