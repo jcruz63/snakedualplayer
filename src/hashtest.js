@@ -73,12 +73,22 @@ let segmentsTwo = [
     new Segment(new Square(new Point(2, 4)), "body"),
 ]
 
+let segments3 = [
+    new Segment(new Square(new Point(3, 2)), "head", "snake3"),
+    new Segment(new Square(new Point(4, 3)), "body"),
+    new Segment(new Square(new Point(3, 4)), "body"),
+]
+
 
 //create two snakes with the segments
 let snake1 = new Snake(segmentsOne)
 let snake2 = new Snake(segmentsTwo)
+let snake3 = new Snake(segments3)
+
+
 //create the map
-const collisionMap = new Map()
+const collisionMap = new Map() // [key]: [value], [key]: [value]  | [home]: "some text address" collisionMap.get("home") -> "some text address" | [home]: ["address1", "address2"] collisionMap.get("home")[0] -> address1
+// [ajkdhfay788976akhfh -> {x: 1, y: 2}]: [, ]
 //foreach snake get its list of points and iterate over them and push them into the map
 
 const snakes = [snake1, snake2, snake3]
@@ -100,16 +110,41 @@ console.log(collisionMap)
 
 // const point1 = new Point(1, 2);
 // const point2 = new Point(1, 2);
-// const point3 = new Point(2, 2);
-// const point4 = new Point(1, 3);
+// const point3 = new Point(1, 2);
+// const point4 = new Point(1, 2);
 //
 // const list = [point1, point2, point3, point4];
 //
-// // console.log(hash(point1));
-// // console.log(hash(point2));
+// console.log(hash(point1));
+// console.log(hash(point2));
+// console.log(hash(point3));
 //
 //
-// const collisionMap = new Map();
+// const map = new Map();
+// map.set(hash(point1), ["snake1"])
+
+// (params) => {function body}
+// list.forEach((point) => {
+//     if (map.has(hash(point))) {
+//         map.get(hash(point)).push(point); //[key]: value -> value = list [{point{n}}]  N:1 -> infinity
+//     } else {
+//         map.set(hash(point), [point]);
+//     }
+// })
+
+// if(map.has(hash(point1))) {
+//
+
+// if(map.has(hash(point2))){
+//     list = map.get(hash(point2)) //return list
+//     list.push("snake2")
+// }
+
+//push list on 89 into map iterate over list
+
+// console.log(map.get(hash(point1)))
+// console.log("________________________")
+// console.log(map.keys())
 //
 // list.forEach((item) => {
 //     const hashValue = hash(item);
