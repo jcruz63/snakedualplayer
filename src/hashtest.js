@@ -27,9 +27,10 @@ class Square { //this would be render-able
 }
 
 class Segment{
-    constructor(sqr, type){
+    constructor(sqr, type, name){
         this.sqr = sqr;
         this.type = type;
+        this.name = name;
     }
 
     toString(){
@@ -61,13 +62,13 @@ class Snake{
 
 //create two list of segments 3 segments each one head and body
 let segmentsOne = [
-    new Segment(new Square(new Point(1, 2)), "head"),
+    new Segment(new Square(new Point(1, 2)), "head", "snake1"),
     new Segment(new Square(new Point(1, 3)), "body"),
     new Segment(new Square(new Point(1, 4)), "body"),
 ]
 
 let segmentsTwo = [
-    new Segment(new Square(new Point(2, 2)), "head"),
+    new Segment(new Square(new Point(1, 2)), "head", "snake2"),
     new Segment(new Square(new Point(2, 3)), "body"),
     new Segment(new Square(new Point(2, 4)), "body"),
 ]
@@ -79,6 +80,23 @@ let snake2 = new Snake(segmentsTwo)
 //create the map
 const collisionMap = new Map()
 //foreach snake get its list of points and iterate over them and push them into the map
+
+const snakes = [snake1, snake2, snake3]
+
+snakes.forEach(snake =>{
+    snake.segments.forEach(segment => {
+
+        let hashPoint = hash(segment.sqr.topLeft)
+
+        if (collisionMap.has(hashPoint)) {
+            collisionMap.get(hashPoint).push(segment)
+        } else {
+            collisionMap.set(hashPoint, [segment])
+        }
+    })
+})
+console.log(collisionMap)
+
 
 // const point1 = new Point(1, 2);
 // const point2 = new Point(1, 2);

@@ -49,10 +49,10 @@ body {
 
 
 .title {
-    font-family: monospace;
-    color: rgb(0,255,239);
+    font-family: "8-bit HUD";
+    color: rgb(250, 65, 65);
     text-align: center;
-    margin: 0;
+    margin: 10px;
     padding: 0;
     font-size: 40px;
 }
@@ -143,19 +143,19 @@ body {
 
 
 .htp-title {
-    font-family: Arial, serif;
+    font-family: "8-bit HUD";
     text-align: center;
     margin: 0;
     padding: 0;
-    font-size: 40px;
+    font-size: 15px;
 }
 
 .htp-p {
     font-family: Arial;
     text-align: center;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
+    margin: 20px;
+    padding: 10px;
+    font-size: 17px;
 }
 
 #numberOfPlayers {
