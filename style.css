@@ -12,6 +12,15 @@ body {
     background-color: black;
 }
 
+#fps{
+    /*make it apper in the top right*/
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+}
+
+
 .leaderboard {
     background-color: #000000;
     color: #ffffff;
