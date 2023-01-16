@@ -1,5 +1,5 @@
 import GameView from "./GameView";
-
+import objectHash from "object-hash";
 class CollisionDetection {
     static checkObjCollision(obj1: Renderable, obj2: Renderable): boolean {
         return obj1.x === obj2.x && obj1.y === obj2.y;
