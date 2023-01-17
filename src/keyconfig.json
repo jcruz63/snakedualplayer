@@ -1,0 +1,17 @@
+{
+  "keysets": [
+    {
+      "up": "KeyW", "down": "KeyS", "left": "KeyA", "right": "KeyD"
+    },
+    {
+      "up": "ArrowUp", "down": "ArrowDown", "left": "ArrowLeft", "right": "ArrowRight"
+    },
+    {
+      "up": "KeyI", "down": "KeyK", "left": "KeyJ", "right": "KeyL"
+    },
+
+    {
+      "up": "Numpad8", "down": "Numpad5", "left": "Numpad4", "right": "Numpad6"
+    }
+  ]
+}

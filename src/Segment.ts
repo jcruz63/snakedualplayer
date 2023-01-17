@@ -15,3 +15,5 @@ class Segment {
         this.bodyPart = bodyPart;
     }
 }
+
+export default Segment;
