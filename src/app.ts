@@ -1,5 +1,5 @@
 import Point from "./Point";
-import Snake from "./Snake";
+import Player from "./Player";
 import Segment from "./Segment";
 import GameView from "./GameView";
 
