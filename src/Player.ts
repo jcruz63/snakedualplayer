@@ -3,18 +3,16 @@ import Segment from "./Segment";
 class Player {
     private _segments: Segment[];
     private _direction: string;
-    private _x: number;
-    private _y: number;
-    private _length: number;
+    private _length: number = 3;
     // i don't see a reason to add a width here since the width is always the same as the height (segment wise)
 
 
-    constructor() {
+    constructor(_direction: string) {
         this._segments = [];
-        this._direction = "right";
-        this._x = 0;
-        this._y = 0;
-        this._length = 0;
+        this._direction = _direction;
+        if(length > 3){
+            this._length = length;
+        }
     }
 }
 
