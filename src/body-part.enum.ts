@@ -1,4 +1,4 @@
 export enum BodyPart{
     HEAD = "HEAD",
-    BODY = "BODY"
+    BODY = "BODY",
 }
